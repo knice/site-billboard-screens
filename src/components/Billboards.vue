@@ -1,25 +1,31 @@
 <template>
   <div class="billboards">
-    <ol class="container">
-      <li v-for="b in billboards" :key="b.index" :class="[b.layout, b.color]">
+    <slider animation="fade" height="100%" :interval="7000" :speed="2000" :indicators="false" :control-btn="false">
+      <slider-item v-for="(b) in billboards" :key="b.index">
         <div class="text">
-          <h1>{{ b.headline }}</h1>
+          <qrcode :value="b.link" :options="{ width: 80, margin: 2, color: { dark: '#333', light: '#fff' }}"></qrcode>
           <div class="teaser">
-            <qrcode :value="b.link" :options="{ width: 80, margin: 2 }"></qrcode>
+            <h1>{{ b.headline }}</h1>
             <p v-html="b.teaser"></p>
           </div>
         </div>
         <img :src="b.image" :alt="b.headline" class="banner">
-    </li>
-  </ol>
+      </slider-item>
+    </slider>
   </div>
 </template>
 
 <script>
+
 import axios from "axios";
+import { Slider, SliderItem } from "vue-easy-slider";
 
 export default {
   name: "Billboards",
+  components: {
+    Slider,
+    SliderItem
+  },
   props: {
     msg: String
   },
@@ -35,28 +41,31 @@ export default {
         console.error(error);
     });
   },
-  methods: {}
+  methods: {
+    changeIndex(index) {
+      this.sliderValue = index;
+    }
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-ol {
-  list-style-type: none;
-  padding: 0 0 2rem 0;
-  margin: 0;
-  position: relative;
-  min-height: calc(100vw/3.2);
+
+.billboards {
+  padding: 1.2vw;
 }
 
-li {
+.slider {
+  height: calc(100vw/3.2) !important;
+}
+
+.slider-item {
   list-style-type: none;
   margin: 0;
   padding: 0;
   width: 100%;
   box-sizing: border-box;
-  position: absolute;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
 }
 
 .banner {
@@ -67,50 +76,53 @@ li {
 
 .text {
   position: absolute;
-  padding: 1.2vw 4.4vw 1.2vw 2vw;
+  padding: 1.2em 4.4em 1.2em 2em;
   color: #fff;
-  background-color: rgba(81, 163, 189, 0.8);
-  width: 33rem;
-  font-size: 16px;
+  background-color: rgba(81, 163, 189, 0.6);
+  width: 33em;
+  font-size: 1.38vw;
   font-weight: 400;
   z-index: 999;
   text-align: left;
   line-height: 1.3;
+  bottom: 2vh;
   clip-path: polygon(0 0, 100% 0, 96% 100%, 0% 100%);
+  display: flex;
 
   h1 {
-    margin: 0 0 .25rem 0;
-    font-size: 2.225rem;
-    font-weight: 400;
+    margin: -.15em 0 .28rem 0;
+    font-size: 2em;
+    font-weight: 600;
+    line-height: 1.26;
     text-transform: uppercase;
   }
 
   p {
-    margin: .5rem 0 0;
+    margin: 0;
   }
 
   canvas {
     display: block;
-    float: right;
-    margin: 0 0 .25em 1em;
+    float: left;
+    margin: .15em 1em .25em 0;
   }
-  
+
   .left & {
     left: 0;
-    bottom: 2vh;
+    bottom: 2vw;
   }
 
   .right & {
     right: 0;
-    bottom: 2vh;
+    bottom: 2vw;
   }
 
   .bottom & {
     left: 0;
-    bottom: 2vh;
-    
+    bottom: 2vw;
+
     .teaser {
-      max-width: 42rem;
+      max-width: 42em;
     }
   }
 }
