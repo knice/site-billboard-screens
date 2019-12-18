@@ -1,22 +1,36 @@
 <template>
   <div class="billboards">
-    <slider animation="fade" height="100%" :interval="7000" :speed="2000" :indicators="false" :control-btn="false">
-      <slider-item v-for="(b) in billboards" :key="b.index">
+    <slider
+      animation="fade"
+      height="100%"
+      :interval="7000"
+      :speed="2000"
+      :indicators="false"
+      :control-btn="false"
+    >
+      <slider-item v-for="b in billboards" :key="b.index">
         <div class="text">
-          <qrcode :value="b.link" :options="{ width: 80, margin: 2, color: { dark: '#333', light: '#fff' }}"></qrcode>
+          <qrcode
+            :value="b.link"
+            :options="{
+              width: 80,
+              margin: 2,
+              color: { dark: '#333', light: '#fff' }
+            }"
+          >
+          </qrcode>
           <div class="teaser">
             <h1>{{ b.headline }}</h1>
             <p v-html="b.teaser"></p>
           </div>
         </div>
-        <img :src="b.image" :alt="b.headline" class="banner">
+        <img :src="b.image" :alt="b.headline" class="banner" />
       </slider-item>
     </slider>
   </div>
 </template>
 
 <script>
-
 import axios from "axios";
 import { Slider, SliderItem } from "vue-easy-slider";
 
@@ -35,11 +49,14 @@ export default {
     };
   },
   mounted() {
-    axios({ method: "GET", "url": "data/billboards.json" }).then(result => {
-      this.billboards = result.data.billboards;
-    }, error => {
+    axios({ method: "GET", url: "data/billboards" }).then(
+      result => {
+        this.billboards = result.data.billboards;
+      },
+      error => {
         window.console.error(error);
-    });
+      }
+    );
   },
   methods: {
     changeIndex(index) {
@@ -51,13 +68,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-
 .billboards {
   padding: 1.2vw;
 }
 
 .slider {
-  height: calc(100vw/3.2) !important;
+  height: calc(100vw / 3.2) !important;
 }
 
 .slider-item {
@@ -90,7 +106,7 @@ export default {
   display: flex;
 
   h1 {
-    margin: -.15em 0 .28rem 0;
+    margin: -0.15em 0 0.28em 0;
     font-size: 2em;
     font-weight: 600;
     line-height: 1.26;
@@ -104,7 +120,7 @@ export default {
   canvas {
     display: block;
     float: left;
-    margin: .15em 1em .25em 0;
+    margin: 0.15em 1em 0.25em 0;
   }
 
   .left & {
@@ -126,7 +142,4 @@ export default {
     }
   }
 }
-
-
-
 </style>
