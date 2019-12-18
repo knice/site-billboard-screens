@@ -8,8 +8,8 @@ exports.handler = function(event, context, callback) {
 
   // transform the size parameter into the image URL pattern needed in the request
   const option = {
-    billboards: "https://www.ucsc.edu/index.jsonp",
-    articles: "https://news.ucsc.edu/latest.json"
+    "billboards": "https://www.ucsc.edu/index.jsonp",
+    "articles": "https://news.ucsc.edu/latest.json"
   };
 
   // Report back to our logs
