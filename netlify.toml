@@ -4,6 +4,11 @@
   publish = "dist"
 
 [[redirects]]
-  from = "/data/*"
-  to = "/.netlify/functions/get-data?items=:splat"
+  from = "/data/billboards"
+  to = "/.netlify/functions/get-data?items=billboards"
+  status = 200
+
+[[redirects]]
+  from = "/data/articles"
+  to = "/.netlify/functions/get-data?items=articles"
   status = 200
