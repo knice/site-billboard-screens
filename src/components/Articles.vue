@@ -30,7 +30,7 @@ export default {
     axios({ method: "GET", "url": "data/articles.json" }).then(result => {
       this.articles = result.data.items.slice(0, 6);
     }, error => {
-        console.error(error);
+      window.console.error(error);
     });
   },
   methods: {

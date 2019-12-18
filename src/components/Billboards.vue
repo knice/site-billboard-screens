@@ -38,7 +38,7 @@ export default {
     axios({ method: "GET", "url": "data/billboards.json" }).then(result => {
       this.billboards = result.data.billboards;
     }, error => {
-        console.error(error);
+        window.console.error(error);
     });
   },
   methods: {
