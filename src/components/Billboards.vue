@@ -94,7 +94,7 @@ export default {
   position: absolute;
   padding: 1.2em 4.4em 1.2em 2em;
   color: #fff;
-  background-color: rgba(81, 163, 189, 0.6);
+  background-color: rgba(2, 48, 133, 0.6);
   width: 33em;
   font-size: 1.38vw;
   font-weight: 400;
