@@ -10,15 +10,16 @@
     >
       <slider-item v-for="b in billboards" :key="b.index">
         <div class="text">
-          <qrcode
-            :value="b.link"
-            :options="{
-              width: 80,
-              margin: 2,
-              color: { dark: '#333', light: '#fff' }
-            }"
-          >
-          </qrcode>
+          <div class="qr-code">
+            <qrcode
+              :value="b.link"
+              :options="{
+                width: 160,
+                color: { dark: '#333', light: '#fff' }
+              }"
+            >
+            </qrcode>
+          </div>
           <div class="teaser">
             <h1>{{ b.headline }}</h1>
             <p v-html="b.teaser"></p>
@@ -49,7 +50,10 @@ export default {
     };
   },
   mounted() {
-    axios({ method: "GET", url: "data/billboards" }).then(
+    axios({
+      method: "GET",
+      url: "/.netlify/functions/get-data/?items=billboards"
+    }).then(
       result => {
         this.billboards = result.data.billboards;
       },
@@ -69,11 +73,12 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .billboards {
-  padding: 1.2vw;
+  padding: 0;
 }
 
 .slider {
-  height: calc(100vw / 3.2) !important;
+  aspect-ratio: 16/9;
+  height: auto;
 }
 
 .slider-item {
@@ -92,9 +97,9 @@ export default {
 
 .text {
   position: absolute;
-  padding: 1.2em 4.4em 1.2em 2em;
+  padding: 1.6em 4em 1.6em 4em;
   color: #fff;
-  background-color: rgba(2, 48, 133, 0.6);
+  background-color: rgba(13, 48, 112, 0.9);
   width: 33em;
   font-size: 1.38vw;
   font-weight: 400;
@@ -104,12 +109,14 @@ export default {
   bottom: 2vh;
   clip-path: polygon(0 0, 100% 0, 96% 100%, 0% 100%);
   display: flex;
+  flex-direction: row;
+  gap: 1vw;
 
   h1 {
-    margin: -0.15em 0 0.28em 0;
+    margin: -0.15em 0 0.14em 0;
     font-size: 2em;
     font-weight: 600;
-    line-height: 1.26;
+    line-height: 1.2;
     text-transform: uppercase;
   }
 
@@ -119,8 +126,7 @@ export default {
 
   canvas {
     display: block;
-    float: left;
-    margin: 0.15em 1em 0.25em 0;
+    margin: 0;
   }
 
   .left & {
@@ -136,10 +142,6 @@ export default {
   .bottom & {
     left: 0;
     bottom: 2vw;
-
-    .teaser {
-      max-width: 42em;
-    }
   }
 }
 </style>

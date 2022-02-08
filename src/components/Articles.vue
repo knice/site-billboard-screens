@@ -35,7 +35,10 @@ export default {
     };
   },
   mounted() {
-    axios({ method: "GET", url: "data/articles" }).then(
+    axios({
+      method: "GET",
+      url: "/.netlify/functions/get-data/?items=articles"
+    }).then(
       result => {
         this.articles = result.data.items.slice(0, 6);
       },
@@ -65,7 +68,7 @@ export default {
 .articles {
   text-align: left;
   padding: 1vw 1.2vw;
-  font-size: 1.25vw;
+  font-size: 1rem;
 }
 
 ul {
@@ -73,9 +76,9 @@ ul {
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
   grid-row-gap: 1.5em;
-  grid-column-gap: 3.2em;
+  grid-column-gap: 2em;
   text-align: left;
 }
 
@@ -86,25 +89,14 @@ li {
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
+  gap: 0.6em;
 }
 
-h1,
 h2 {
   margin: 0 0 0.25em 0;
   font-weight: 400;
   color: #333;
-  line-height: 1.28;
-}
-
-h1 {
-  font-size: 2.6em;
-  text-align: center;
-  margin: 0.5vw 0 1vw;
-  font-weight: 400;
-  text-transform: uppercase;
-}
-
-h2 {
+  line-height: 1.26;
   font-size: 1.35em;
 }
 
@@ -115,6 +107,5 @@ p {
 
 canvas {
   display: block;
-  margin: 0 0.5rem 0.25em 0;
 }
 </style>

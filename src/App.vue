@@ -1,19 +1,16 @@
 <template>
   <div id="app">
     <Billboards />
-    <Articles />
   </div>
 </template>
 
 <script>
 import Billboards from "./components/Billboards.vue";
-import Articles from "./components/Articles.vue";
 
 export default {
   name: "app",
   components: {
-    Billboards,
-    Articles
+    Billboards
   }
 };
 </script>
