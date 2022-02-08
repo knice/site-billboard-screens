@@ -2,8 +2,3 @@
   functions = "./functions"
   command = "npm run build"
   publish = "dist"
-
-[[redirects]]
-  from = "/data/*"
-  to = "/.netlify/functions/get-data?items=:splat"
-  status = 301
