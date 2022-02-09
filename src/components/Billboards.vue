@@ -14,7 +14,7 @@
             <qrcode
               :value="b.link"
               :options="{
-                width: 160,
+                width: 180,
                 color: { dark: '#333', light: '#fff' }
               }"
             >
@@ -124,9 +124,20 @@ export default {
     margin: 0;
   }
 
+  .qr-code {
+    flex-basis: 18%;
+  }
+
+  .teaser {
+    flex-basis: 82%;
+  }
+
   canvas {
     display: block;
     margin: 0;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 32vw;
   }
 
   .left & {
