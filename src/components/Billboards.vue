@@ -12,7 +12,7 @@
         <div class="text">
           <div class="qr-code">
             <qrcode
-              :value="b.link"
+              :value="addTracking(b.link)"
               :options="{
                 width: 180,
                 color: { dark: '#333', light: '#fff' }
@@ -65,6 +65,13 @@ export default {
   methods: {
     changeIndex(index) {
       this.sliderValue = index;
+    },
+    addTracking(url) {
+      if (url.includes("?ref=")) {
+        return url.replace(/\?ref=\S*$/gm, "?ref=qrcode");
+      } else {
+        return url + "?ref=qrcode";
+      }
     }
   }
 };
