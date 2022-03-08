@@ -21,7 +21,7 @@
             </qrcode>
           </div>
           <div class="teaser">
-            <h1>{{ b.headline }}</h1>
+            <h1 v-html="b.headline"></h1>
             <p v-html="b.teaser"></p>
           </div>
         </div>
@@ -121,7 +121,7 @@ export default {
 
   h1 {
     margin: -0.15em 0 0.14em 0;
-    font-size: 2em;
+    font-size: clamp(1.15rem, -1.6058rem + 4.2308vw, 2.825rem);
     font-weight: 600;
     line-height: 1.2;
     text-transform: uppercase;
@@ -129,6 +129,7 @@ export default {
 
   p {
     margin: 0;
+    font-size: clamp(1rem, -2rem + 4.2308vw, 1.85rem);
   }
 
   .qr-code {
